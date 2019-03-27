@@ -1,0 +1,33 @@
+.error {
+    font-weight: 500;
+    color: #f26c4f;
+    display: inline-block;
+    margin-bottom: 10px;  
+}
+field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: lighter;
+    color: #f00;
+    margin-left: 180px;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+#btnBooked {
+    width: 160px;
+    height: 35px;
+    text-align: center;
+}

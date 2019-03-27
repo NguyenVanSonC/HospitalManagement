@@ -1,0 +1,118 @@
+﻿@model SunShineHospital.Models.DoctorViewModel
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<div id="breadcrumb">
+    <div class="container">
+        <ul>
+            <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+            <li>@Model.User.FullName</li>
+        </ul>
+    </div>
+</div>
+		
+<div class="container margin_60">
+    <div class="row">
+        <aside class="col-xl-3 col-lg-4" id="sidebar">
+            <div class="box_profile">
+                <figure>
+                    <img src="@Model.Image" alt="" class="img-fluid">
+                </figure>
+                <small>Chuyên : @Model.Department.Name</small>
+                <h1>Bác sĩ : @Model.User.FullName</h1>
+                <span class="rating">
+                    <i class="icon_star voted"></i>
+                    <i class="icon_star voted"></i>
+                    <i class="icon_star voted"></i>
+                    <i class="icon_star voted"></i>
+                    <i class="icon_star"></i>
+                    <small>(145)</small>
+                </span>
+                <ul class="statistic">
+                    <li>@Model.ViewCount Lượt xem</li>
+                    <li>0 Bệnh Nhân</li>
+                </ul>
+                <ul class="contacts">
+                    <li><h6>Địa chỉ</h6>@Model.User.Address</li>
+                    <li><h6>Tốt nghiệp</h6>@Model.Education</li>
+                    <li><h6>Số điện thoại</h6>@Model.User.PhoneNumber</li>
+                </ul>
+            </div>
+        </aside>
+        <div class="col-xl-9 col-lg-8">
+            <div class="box_general_2 add_bottom_45">
+                <div class="main_title_4">
+                    <h3><i class="icon_circle-slelected"></i>Chọn ngày, giờ khám</h3>
+                </div>
+
+                <div class="row add_bottom_45">
+                    <div class="col-lg-7">
+                        <div class="form-group">
+                            <div id="calendar" data-id="@Model.ID"></div>
+                            <ul class="legend">
+                                <li><strong></strong>Còn chỗ</li>
+                                <li><strong></strong>Kín chỗ</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <ul class="time_select version_2 add_top_20">
+                            <li>
+                                <input type="radio" id="radio5" name="radio_time" value="08:30" data-id="@Model.ID">
+                                <label for="radio5">08.30am</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="radio6" name="radio_time" value="09:00" data-id="@Model.ID">
+                                <label for="radio6">09.00am</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="radio1" name="radio_time" value="09:30" data-id="@Model.ID">
+                                <label for="radio1">09.30am</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="radio2" name="radio_time" value="10:00" data-id="@Model.ID">
+                                <label for="radio2">10.00am</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="radio3" name="radio_time" value="10:30" data-id="@Model.ID">
+                                <label for="radio3">10.30am</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="radio4" name="radio_time" value="11:00" data-id="@Model.ID">
+                                <label for="radio4">11.00am</label>
+                            </li>
+
+                            <li>
+                                <input type="radio" id="radio7" name="radio_time" value="13.30" data-id="@Model.ID">
+                                <label for="radio7">01.30pm</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="radio8" name="radio_time" value="14.00" data-id="@Model.ID">
+                                <label for="radio8">02.00pm</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="radio9" name="radio_time" value="14.30" data-id="@Model.ID">
+                                <label for="radio9">02.30pm</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="radio10" name="radio_time" value="15.00" data-id="@Model.ID">
+                                <label for="radio10">03.00pm</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="radio11" name="radio_time" value="15.30" data-id="@Model.ID">
+                                <label for="radio11">03.30pm</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="radio12" name="radio_time" value="16.00" data-id="@Model.ID">
+                                <label for="radio12">04.00pm</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center"><a href="#" class="btn_1 medium" id="btnCreateBooking">Đặt lịch khám </a></div>
+        </div>
+    </div>
+</div>

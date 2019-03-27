@@ -1,0 +1,80 @@
+﻿@model SunShineHospital.Models.RegisterViewModel
+@using BotDetect.Web.Mvc;
+
+@{
+    ViewBag.Title = "Register";
+}
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+
+<div class="bg_color_2">
+    <div class="container margin_60_35">
+        <div id="register">
+            <h1>Đăng ký tài khoản</h1>
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(false, "", new { @class = "error" })
+                    <div class="box_form">
+                        <div class="form-group">
+                            <label>Họ và tên</label>
+                            @Html.TextBoxFor(model => model.FullName, new { placeholder = "Họ tên", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Địa chỉ</label>
+                            @Html.TextBoxFor(model => model.Address, new { placeholder = "Địa chỉ", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            @Html.TextBoxFor(model => model.PhoneNumber, new { placeholder = "Số điện thoại", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Giới Tính</label>
+                            @Html.DropDownListFor(model => model.Gender, new SelectList(
+                                new[] {
+                                    new { Value = "true", Text = "Nam" },
+                                    new { Value = "false", Text = "Nữ" },
+                                },
+                                "Value",
+                                "Text"
+                                ), new {@class="form-control"})
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày sinh</label>
+                            @Html.TextBoxFor(model => model.BirthDay, new { type = "date", @class = "datefield form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Tên tài khoản</label>
+                            @Html.TextBoxFor(model => model.UserName, new { placeholder = "Tên tài khoản", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Mật khẩu</label>
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                        </div>
+                        <div id="pass-info" class="clearfix"></div>
+
+                        @{
+                            MvcCaptcha registerCaptcha = new MvcCaptcha("registerCaptcha");
+                        }
+                        @Html.Captcha(registerCaptcha)
+                        @Html.TextBox("CaptchaCode")
+                        <div class="form-group text-center add_top_30">
+                            <input class="btn_1" type="submit" value="Đăng ký">
+                        </div>
+                    </div>
+                    }
+                    <form>
+
+                        <p class="text-center"><small>Has voluptua vivendum accusamus cu. Ut per assueverit temporibus dissentiet. Eum no atqui putant democritum, velit nusquam sententiae vis no.</small></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

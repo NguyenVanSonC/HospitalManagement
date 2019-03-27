@@ -1,0 +1,133 @@
+﻿@model SunShineHospital.Models.BookingViewModel
+
+@{
+    ViewBag.Title = "CreateBooking";
+}
+
+<main>
+    <div id="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                <li><a href="#">Bác sĩ</a></li>
+                <li>Đặt lịch</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container margin_60">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8">
+                <div class="box_general_3 cart">
+                    <div class="message">
+                        <p>Bạn có tài khoản? <a href="#0">Đăng nhập</a></p>
+                    </div>
+                    <div class="form_title">
+                        <h3><strong></strong>Thông tin của bạn</h3>
+                        <p>
+                            Điền thông tin
+                        </p>
+                    </div>
+                    <div class="step">
+                        <form method="post" id="frmBooking">
+                            @if (Request.IsAuthenticated)
+                            {
+                                <div class="form-group">
+                                    <label>
+                                        <input type="checkbox" name="policy_terms" id="policy_terms">
+                                        Sử dụng thông tin đăng nhập
+                                    </label>
+                                </div>
+                            }
+                            
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Họ và Tên</label>
+                                        <input type="text" class="form-control" id="firstname_booking" name="name_booking" placeholder="Nguyễn Văn A">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Giới Tính</label>
+                                        <select class="form-control" id="gender" name="gender">
+                                            <option value="true">Nam</option>
+                                            <option value="false">Nữ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" id="email_booking" name="email_booking" class="form-control" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Ngày Sinh</label>
+                                        <input type="date" class="form-control" id="birth_booking" name="birth_booking">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Điện Thoại</label>
+                                        <input type="text" id="telephone_booking" name="telephone_booking" class="form-control" placeholder="+84964702541">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Địa chỉ</label>
+                                        <input type="text" id="address_booking" name="address_booking" class="form-control" placeholder="Địa chỉ">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>
+                                            <input type="checkbox" name="healthinsurance" id="healthinsurance">
+                                            Bạn có bảo hiểm y tế không ?
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="doctor_id" value="@Model.Doctor.ID"/>
+                            <a href="confirm.html" class="btn_1" id="btnBooked">Đặt lịch</a>
+                        </form>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <aside class="col-xl-4 col-lg-4" id="sidebar">
+                <div class="box_general_3 booking">
+                    <form>
+                        <div class="title">
+                            <h3>Thông tin lịch khám</h3>
+                        </div>
+                        <div class="summary">
+                            <ul>
+                                <li>Ngày: <strong class="float-right">@Model.Day</strong></li>
+                                <li>Giờ: <strong class="float-right">@Model.Time</strong></li>
+                                <li>Tên Bác sĩ: <strong class="float-right">@Model.Doctor.User.FullName</strong></li>
+                            </ul>
+                        </div>
+                        <ul class="treatments checkout clearfix">
+                            <li>
+                                Phí thăm khám <strong class="float-right" id="chargeBooking">200VNĐ</strong>
+                            </li>
+                            <li class="total">
+                                Tổng <strong class="float-right" id="chargeTotal">200VNĐ</strong>
+                            </li>
+                        </ul>
+                        <hr>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </div>
+</main>
+

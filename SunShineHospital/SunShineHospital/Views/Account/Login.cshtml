@@ -1,0 +1,40 @@
+﻿@using SunShineHospital.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="bg_color_2">
+    <div class="container margin_60_35">
+        <div id="login-2">
+            <h1>Đăng nhập tài khoản</h1>
+            @using (Html.BeginForm("Login", "Account", new { returnUrl = @ViewBag.returnUrl }, FormMethod.Post))
+            {
+                @Html.ValidationSummary(false, "", new { @class = "error" })
+                <div class="box_form clearfix">
+                    <div class="box_login">
+                        <a href="#0" class="social_bt facebook">Đăng nhập Facebook</a>
+                        <a href="#0" class="social_bt google">Đăng nhập Google</a>
+                    </div>
+                    <div class="box_login last">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.UserName, new { placeholder = "Tên tài khoản", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.PasswordFor(model => model.Password, new { placeholder = "Mật khẩu", @class = "form-control" })
+                            @Html.CheckBoxFor(model => model.RememberMe, new {@class= "forgot" })
+                            <small>Nhớ mật khẩu</small>
+                            <br/>
+                            <a href="#0" class="forgot"><small>Quên mật khẩu?</small></a>
+                        </div>
+                        <div class="form-group">
+                            <input class="btn_1" type="submit" value="Đăng nhập">
+                        </div>
+                    </div>
+                </div>
+            }
+            <p class="text-center link_bright">Bạn chưa có tài khoản? <a href="dang-ky.html"><strong>Đăng ký tài khoản</strong></a></p>
+        </div>
+    </div>
+</div>
+

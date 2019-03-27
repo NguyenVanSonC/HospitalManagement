@@ -1,0 +1,25 @@
+﻿@using SunShineHospital.Models
+@model IEnumerable<DepartmentViewModel>
+
+<div class="container margin_120_95">
+    <div class="main_title">
+        <h2>Tìm Bác Sĩ Theo Khoa</h2>
+        <p>Bệnh Viện SunShine Kính Chào</p>
+    </div>
+    <div class="row">
+        @foreach (var department in Model)
+        {
+            var url = "/" + department.Alias + ".dp-" + department.ID + ".html";
+            <div class="col-lg-3 col-md-6">
+                <a href="@url" class="box_cat_home">
+                    <i class="icon-info-4"></i>
+                    <img src="@department.Image" width="60" height="60" alt="">
+                    <h3>@department.Name</h3>
+                    <ul class="clearfix">
+                        <li><strong>0</strong>Doctors</li>
+                    </ul>
+                </a>
+            </div>
+        }
+    </div>
+</div>
