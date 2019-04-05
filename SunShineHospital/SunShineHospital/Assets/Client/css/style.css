@@ -2867,9 +2867,9 @@ ul.legend li strong {
 ul.legend li:first-child strong {
   background-color: #8ec549;
 }
-ul.legend li:last-child strong {
-  background-color: #eb525b;
-}
+    ul.legend li:last-child strong {
+        background-color: #74d1c6;
+    }
 
 ul.time_select.version_2 li {
   float: left;
@@ -2879,9 +2879,10 @@ ul.time_select li input[type="radio"] {
   display: none;
   cursor: pointer;
 }
-ul.time_select li input[type="radio"]:checked + label {
-  background-color: #333;
-  color: #fff;
+
+ul.time_select li label:hover {
+    background-color: #e74e84;
+    color: #fff;
 }
 ul.time_select li label {
   display: inline-block;
@@ -2901,10 +2902,6 @@ ul.time_select li label {
   margin: 5px;
   text-align: center;
   cursor: pointer;
-}
-ul.time_select li label:hover {
-  background-color: #e74e84;
-  color: #fff;
 }
 
 ul.treatments {

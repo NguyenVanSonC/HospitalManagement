@@ -31,6 +31,8 @@ namespace SunShineHospital.Data
         public DbSet<ExaminationDetail> ExaminationDetails { set; get; }
         public DbSet<Examination> Examinations { set; get; }
         public DbSet<Test> Tests { set; get; }
+        public DbSet<Comment> Comments { set; get; }
+        public DbSet<Rate> Rates { set; get; }
         public DbSet<ApplicationRole> ApplicationRoles { set; get; }
 
         protected override void OnModelCreating(DbModelBuilder builder)

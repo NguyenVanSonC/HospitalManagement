@@ -1,0 +1,26 @@
+﻿@{
+    var doctorId = (int) ViewBag.doctorId;
+}
+
+<section class='rating-widget'>
+    <div class='rating-stars text-center'>
+        <p id="header-rate" data-id="@doctorId">Đánh Giá Bác Sỹ</p>
+        <ul id='stars' class="list-start">
+            <li class='star' title='Trung Bình' data-value='1'>
+                <i class='icon-star'></i>
+            </li>
+            <li class='star' title='Bình Thường' data-value='2'>
+                <i class='icon-star'></i>
+            </li>
+            <li class='star' title='Tốt' data-value='3'>
+                <i class='icon-star'></i>
+            </li>
+            <li class='star' title='Qúa Tốt' data-value='4'>
+                <i class='icon-star'></i>
+            </li>
+            <li class='star' title='Tuyệt Vời !' data-value='5'>
+                <i class='icon-star'></i>
+            </li>
+        </ul>
+    </div>
+</section>

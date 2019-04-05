@@ -8,6 +8,8 @@ namespace SunShineHospital.Models
 {
     public class AppoinmentViewModel
     {
+        public int ID { set; get; }
+
         public int DoctorID { set; get; }
 
         public int PatientID { set; get; }

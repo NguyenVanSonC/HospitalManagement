@@ -1,0 +1,50 @@
+﻿@model SunShineHospital.Models.DoctorViewModel
+@{
+    ViewBag.Title = "Register";
+    var listDepartment = ViewBag.listDepartment;
+}
+
+<div id="hero_register">
+    <div class="container margin_120_95">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1>Hãy trở thành đội ngũ bác sỹ của chúng tôi !</h1>
+            </div>
+            <div class="col-lg-5 ml-auto">
+                <div class="box_form">
+                    @using (Html.BeginForm("Register", "Doctor", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(false, "", new {@class = "error"})
+
+
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.Education, new {placeholder = "Tên trường đại học", @class = "form-control"})
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.DropDownListFor(m => m.DepartmentID, new SelectList(listDepartment,
+                                        "Value",
+                                        "Text"
+                                        ), new {@class = "form-control"})
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    @Html.TextAreaFor(m => m.Description, new {placeholder = "Mô tả", @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-center add_top_30"><input type="submit" class="btn_1" value="Đăng ký"></p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

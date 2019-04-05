@@ -9,12 +9,20 @@ namespace SunShineHospital.Data.Repositories
     public interface IDoctorRepository : IRepository<Doctor>
     {
         ApplicationUser GetUserByDoctorId(int id);
+
+        Doctor GetDoctorIdByUserId(string userId);
     }
 
     public class DoctorRepository : RepositoryBase<Doctor>, IDoctorRepository
     {
         public DoctorRepository(IDbFactory dbFactory) : base(dbFactory)
         {
+        }
+
+        public Doctor GetDoctorIdByUserId(string userId)
+        {
+            var query = DbContext.Doctors.Where(p => p.UserId == userId).Select(p => p).SingleOrDefault();
+            return query;
         }
 
         public ApplicationUser GetUserByDoctorId(int id)

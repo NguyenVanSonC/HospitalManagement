@@ -34,7 +34,7 @@ namespace SunShineHospital.Service
 
         Doctor GetById(int id);
 
-
+        Doctor GetDoctorIdByUserId(string userId);
 
         void Save();
     }
@@ -79,6 +79,11 @@ namespace SunShineHospital.Service
         public Doctor GetById(int id)
         {
             return _doctorRepository.GetSingleByCondition(x => x.ID == id, new string[] {"User", "Department"});
+        }
+
+        public Doctor GetDoctorIdByUserId(string userId)
+        {
+            return _doctorRepository.GetDoctorIdByUserId(userId);
         }
 
         public IEnumerable<Doctor> GetHotDoctor(int top)

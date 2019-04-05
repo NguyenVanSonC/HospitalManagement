@@ -21,6 +21,8 @@ namespace TeduShop.Web.Mappings
                 cfg.CreateMap<Prescription, PrescriptionViewModel>();
                 cfg.CreateMap<PrescriptionDetail, PrescriptionDetailsViewModel>();
                 cfg.CreateMap<Test, TestViewModel>();
+                cfg.CreateMap<Comment, CommentViewModel>();
+                cfg.CreateMap<Rate, RateViewModel>();
             });
         }
     }

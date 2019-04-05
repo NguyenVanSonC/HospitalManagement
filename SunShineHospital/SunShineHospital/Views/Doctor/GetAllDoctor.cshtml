@@ -46,11 +46,12 @@
             <div class="row">
                 @foreach (var doctor in Model.Items)
                 {
+                    var url = "/" + doctor.Alias + ".doc-" + doctor.ID + ".html";
                     <div class="col-md-4">
                         <div class="box_list wow fadeIn">
-                            <a href="#0" class="wish_bt"></a>
+                            <a href="#" class="wish_bt"></a>
                             <figure>
-                                <a href="">
+                                <a href="@url">
                                     <img src="@doctor.Image" class="img-fluid" alt="">
                                     <div class="preview"><span>Xem thông tin</span></div>
                                 </a>
@@ -63,7 +64,7 @@
                                 <a href="badges.html" data-toggle="tooltip" data-placement="top" data-original-title="Badge Level" class="badge_list_1"><img src="img/badges/badge_2.svg" width="15" height="15" alt=""></a>
                             </div>
                             <ul>
-                                <li><a href="detail-page.html">Đặt lịch</a> </li>
+                                <li><a href="@url">Đặt lịch</a> </li>
                             </ul>              
                         </div>
                     </div>

@@ -1,0 +1,36 @@
+﻿@using SunShineHospital.Models
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Areas/Admin/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="bg_color_2">
+    <div class="container margin_60_35">
+        <div id="login">
+            <h1>Đăng nhập tài khoản</h1>
+            <div class="box_form">
+                @using (Html.BeginForm("Login", "Account", new { returnUrl = @ViewBag.returnUrl }, FormMethod.Post))
+                {
+                    <div class="divider"><span>Admin</span></div>
+                    @Html.ValidationSummary(false, "", new { @class = "error" })
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.UserName, new { placeholder = "Tên tài khoản", @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(model => model.Password, new { placeholder = "Mật khẩu", @class = "form-control" })
+                        @Html.CheckBoxFor(model => model.RememberMe, new { @class = "forgot" })
+                        <small>Nhớ mật khẩu</small>
+                        <br />
+                    </div>
+                    <a href="#0"><small>Forgot password?</small></a>
+                    <div class="form-group text-center add_top_20">
+                        <input class="btn_1 medium" type="submit" value="Đăng nhập">
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
