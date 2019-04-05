@@ -4,11 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 using SunShineHospital.Infrastructure.Core;
 using SunShineHospital.Model.Models;
 using SunShineHospital.Models;
 using SunShineHospital.Service;
 using SunShineHospital.Common;
+using SunShineHospital.Infrastructure.Extensions;
+using SunShineHospital.Web.App_Start;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace SunShineHospital.Controllers
 {
@@ -16,12 +20,80 @@ namespace SunShineHospital.Controllers
     {
         private IDoctorService _doctorService;
         private IDepartmentService _departmentService;
+        private ApplicationUserManager _userManager;
 
-        public DoctorController(IDoctorService doctorService, IDepartmentService departmentService)
+        public DoctorController(IDoctorService doctorService, IDepartmentService departmentService, ApplicationUserManager userManager)
         {
             this._doctorService = doctorService;
             this._departmentService = departmentService;
+            UserManager = userManager;
         }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Register()
+        {
+            var listDepartmentModel = _departmentService.GetAll();
+            var listDepartmentViewModel =
+                Mapper.Map<IEnumerable<Department>, IEnumerable<DepartmentViewModel>>(listDepartmentModel);
+            IEnumerable<SelectListItem> selectListDepartment = listDepartmentViewModel.OrderBy(m => m.Name).Select(m =>
+                new SelectListItem()
+                {
+                    Value = m.ID.ToString(),
+                    Text = m.Name
+                });
+            ViewBag.listDepartment = selectListDepartment;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(DoctorViewModel doctorViewModel)
+        {
+            if (Request.IsAuthenticated && ModelState.IsValid)
+            {
+                var user = _userManager.FindById(User.Identity.GetUserId());
+                var doctorCheck = _doctorService.GetDoctorIdByUserId(user.Id);
+                if (doctorCheck != null)
+                {
+                    TempData["error"] = string.Format("Xin lỗi, Tài khoản bác sỹ đã tồn tại !");
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    var doctorModel = new Doctor();
+                    doctorModel.UpdateDoctor(doctorViewModel);
+                    doctorModel.CreatedBy = user.FullName;
+                    doctorModel.UserId = user.Id;
+                    doctorModel.Salary = 7000000;
+                    doctorModel.Image = "Assets/Client/img/doctor.jpg";
+                    doctorModel.Alias = GetAliasByName.GetAlias(user.FullName);
+                    doctorModel.CreatedDate = DateTime.Now;
+                    doctorModel.Status = true;
+                    doctorModel.HomeFlag = true;
+                    _doctorService.Add(doctorModel);
+                    _userManager.AddToRolesAsync(user.Id, new string[] { "Doctor" });
+                    _doctorService.Save();
+                    TempData["message"] = string.Format("Chaò mừng bạn đã trở thành bác sỹ của chúng tôi !");
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+            {
+                return View();
+            }
+        }
+
 
         public ActionResult Detail(int id)
         {

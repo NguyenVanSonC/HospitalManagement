@@ -1,0 +1,120 @@
+﻿@using Microsoft.AspNet.Identity
+@model int?
+@{
+    var userId = User.Identity.GetUserId();
+}
+<div style="display: none" data-id="@Model" id="comment-doctor-id"></div>
+<ul id="commentBody">
+   
+</ul>
+<script id="tplComments" type="x-tmpl-mustache">
+    <li>
+        <div class="review-box clearfix">
+            <figure class="rev-thumb">
+                <img src="http://via.placeholder.com/150x150.jpg" alt="">
+            </figure>
+            <div class="rev-content">
+                <div class="rating">
+                    <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
+                </div>
+                <div class="rev-info">
+                    {{UserName}} – {{CreatedDate}}
+                </div>
+                <div class="rev-text">
+                    <p>
+                        {{Content}}
+                    </p>
+                </div>
+                <div id="area-comment-btn">
+                    <ul id="btn-comment" data-user="{{UserId}}">
+                        
+                        @if (Request.IsAuthenticated)
+                        {
+                            <li><a class="btnEditcomment" href="#" data-id="{{CommentId}}">Sửa</a></li>
+                            <li><a class="btnDeletecomment" href="#" data-id="{{CommentId}}" data-doctor="@Model">Xóa</a></li>
+                            <li><a class="btnReplyComment" href="#" data-id="{{CommentId}}">Trả lời</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <br/>
+            <div>
+                @if (Request.IsAuthenticated)
+                {
+                    <form id="frmComment-{{CommentId}}" style="display: none">
+                        <div class="form-group">
+                            <textarea class="form-control content-{{CommentId}}" name="comments" id="comments2" rows="6" placeholder="Bình luận"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btnCreateComment btn_1" data-id="{{CommentId}}" data-doctor="@Model"> Bình luận</button>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </li>
+</script>
+
+<script id="tplReplyComments" type="x-tmpl-mustache">
+    <ul class="replied-to" id="comments-reply">
+        <li>
+            <div class="review-box clearfix">
+                <figure class="rev-thumb">
+                    <img src="http://via.placeholder.com/150x150.jpg" alt="">
+                </figure>
+                <div class="rev-content">
+                    <div class="rating">
+                        <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
+                    </div>
+                    <div class="rev-info">
+                        {{childUserName}} – {{childCreatedDate}}
+                    </div>
+                    <div class="rev-text">
+                        <p>
+                            {{childContent}}
+                        </p>
+                    </div>
+                    <div id="area-comment-btn">
+                        <ul id="btn-comment" data-user="{{UserId}}">
+                            @if (Request.IsAuthenticated)
+                            {
+                                <li><a class="btnEditcomment" href="#" data-id="{{childCommentId}}">Sửa</a></li>
+                                <li><a class="btnDeletecomment" href="#" data-id="{{childCommentId}}" data-doctor="@Model">Xóa</a></li>
+                            }                
+                        </ul>
+                    </div>
+                </div>
+                <br />
+                <div>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <form id="frmComment-{{childCommentId}}" style="display: none">
+                            <div class="form-group">
+                                <textarea class="form-control content-{{childCommentId}}" name="comments" id="comments2" rows="6" placeholder="Bình luận"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btnCreateComment btn_1" data-id="{{childCommentId}}" data-doctor="@Model"> Bình luận</button>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </li>
+    </ul>
+</script>
+
+<script id="tplCreateComment" type="x-tmpl-mustache">
+    @if (Request.IsAuthenticated)
+    {
+        <div>
+            <form id="frmComment">
+                <div class="form-group">
+                    <textarea class="form-control content-main" name="comments" id="comments2" rows="6" placeholder="Bình luận"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btnCreateMainComment btn_1" data-doctor="@Model"> Bình luận</button>
+                </div>
+            </form>
+        </div>
+    }
+</script>

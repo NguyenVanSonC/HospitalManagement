@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SunShineHospital.Common;
 
 namespace SunShineHospital.Data.Migrations
 {
@@ -19,7 +20,503 @@ namespace SunShineHospital.Data.Migrations
 
         protected override void Seed(SunShineHospital.Data.SunShineHospitalDbContext context)
         {
-           CreateDoctor(context);
+           //CreateDoctor(context);
+            //CreateComment(context);
+            //CreateMedicineCategory(context);
+            CreateMedicine(context);
+        }
+
+        private void CreateMedicine(SunShineHospital.Data.SunShineHospitalDbContext context)
+        {
+            if (context.Medicines.Count() == 0)
+            {
+                List<Medicine> listMedicines = new List<Medicine>()
+                {
+                    new Medicine()
+                    {
+                        Name = "Acetaminophen",
+                        Alias = GetAliasByName.GetAlias("Acetaminophen"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 20000,
+                        CategoryID = 1,
+                        Quantity = 10000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Brimonidine",
+                        Alias = GetAliasByName.GetAlias("Brimonidine"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 20000,
+                        CategoryID = 1,
+                        Quantity = 10000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Genotropin",
+                        Alias = GetAliasByName.GetAlias("Genotropin"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 1,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Atenolol",
+                        Alias = GetAliasByName.GetAlias("Atenolol"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 2,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Jentadueto",
+                        Alias = GetAliasByName.GetAlias("Jentadueto"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 2,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "White Cohosh",
+                        Alias = GetAliasByName.GetAlias("White Cohosh"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 2,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+
+                    new Medicine()
+                    {
+                        Name = "Oxaliplatin",
+                        Alias = GetAliasByName.GetAlias("Oxaliplatin"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 3,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "White Cohosh",
+                        Alias = GetAliasByName.GetAlias("White Cohosh"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 3,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Leflunomide",
+                        Alias = GetAliasByName.GetAlias("Leflunomide"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 3,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+
+                    new Medicine()
+                    {
+                        Name = "Librium",
+                        Alias = GetAliasByName.GetAlias("Librium"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 4,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Trazodone",
+                        Alias = GetAliasByName.GetAlias("Trazodone"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 4,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Temazepam",
+                        Alias = GetAliasByName.GetAlias("Temazepam"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 4,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Haloperidol",
+                        Alias = GetAliasByName.GetAlias("Haloperidol"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 5,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Norepinephrine",
+                        Alias = GetAliasByName.GetAlias("Norepinephrine"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 5,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Letrozole",
+                        Alias = GetAliasByName.GetAlias("Letrozole"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 5,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Oxycodone",
+                        Alias = GetAliasByName.GetAlias("Oxycodone"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 6,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Letrozole",
+                        Alias = GetAliasByName.GetAlias("Letrozole"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 6,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Octreotide",
+                        Alias = GetAliasByName.GetAlias("Octreotide"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 6,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Acetaminophen",
+                        Alias = GetAliasByName.GetAlias("Acetaminophen"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 20000,
+                        CategoryID = 7,
+                        Quantity = 10000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Brimonidine",
+                        Alias = GetAliasByName.GetAlias("Brimonidine"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 20000,
+                        CategoryID = 7,
+                        Quantity = 10000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Genotropin",
+                        Alias = GetAliasByName.GetAlias("Genotropin"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 7,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Acetaminophen",
+                        Alias = GetAliasByName.GetAlias("Acetaminophen"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 20000,
+                        CategoryID = 8,
+                        Quantity = 10000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Brimonidine",
+                        Alias = GetAliasByName.GetAlias("Brimonidine"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 20000,
+                        CategoryID = 8,
+                        Quantity = 10000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Genotropin",
+                        Alias = GetAliasByName.GetAlias("Genotropin"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 8,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Acetaminophen",
+                        Alias = GetAliasByName.GetAlias("Acetaminophen"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 20000,
+                        CategoryID = 9,
+                        Quantity = 10000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Brimonidine",
+                        Alias = GetAliasByName.GetAlias("Brimonidine"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 20000,
+                        CategoryID = 9,
+                        Quantity = 10000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Genotropin",
+                        Alias = GetAliasByName.GetAlias("Genotropin"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 9,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Acetaminophen",
+                        Alias = GetAliasByName.GetAlias("Acetaminophen"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 20000,
+                        CategoryID = 10,
+                        Quantity = 10000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Brimonidine",
+                        Alias = GetAliasByName.GetAlias("Brimonidine"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 20000,
+                        CategoryID = 10,
+                        Quantity = 10000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Genotropin",
+                        Alias = GetAliasByName.GetAlias("Genotropin"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 10,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Acetaminophen",
+                        Alias = GetAliasByName.GetAlias("Acetaminophen"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 20000,
+                        CategoryID = 11,
+                        Quantity = 10000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Brimonidine",
+                        Alias = GetAliasByName.GetAlias("Brimonidine"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 20000,
+                        CategoryID = 11,
+                        Quantity = 10000,
+                        CreatedBy = "Admin"
+                    },
+                    new Medicine()
+                    {
+                        Name = "Genotropin",
+                        Alias = GetAliasByName.GetAlias("Genotropin"),
+                        Status = true,
+                        CreatedDate = DateTime.Now,
+                        Price = 50000,
+                        CategoryID = 11,
+                        Quantity = 50000,
+                        CreatedBy = "Admin"
+                    },
+                };
+                context.Medicines.AddRange(listMedicines);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateMedicineCategory(SunShineHospital.Data.SunShineHospitalDbContext context)
+        {
+            if (context.MedicineCategories.Count() == 0)
+            {
+                List<MedicineCategory> listMedicineCategories = new List<MedicineCategory>()
+                {
+                    new MedicineCategory()
+                    {
+                        Name = "Thuốc kháng sinh",
+                        Alias = GetAliasByName.GetAlias("Thuốc kháng sinh"),
+                        Status = true
+                    },
+                    new MedicineCategory()
+                    {
+                        Name = "Thuốc chống sốt rét",
+                        Alias = GetAliasByName.GetAlias("Thuốc chống sốt rét"),
+                        Status = true
+                    },
+                    new MedicineCategory()
+                    {
+                        Name = "Thuốc chữa amip",
+                        Alias = GetAliasByName.GetAlias("Thuốc chữa amip"),
+                        Status = true
+                    },
+                    new MedicineCategory()
+                    {
+                        Name = "Thuốc sát khuẩn",
+                        Alias = GetAliasByName.GetAlias("Thuốc sát khuẩn"),
+                        Status = true
+                    },
+                    new MedicineCategory()
+                    {
+                        Name = "Vitamin",
+                        Alias = GetAliasByName.GetAlias("Vitamin"),
+                        Status = true
+                    },
+                    new MedicineCategory()
+                    {
+                        Name = "Thuốc trợ tim",
+                        Alias = GetAliasByName.GetAlias("Thuốc trợ tim"),
+                        Status = true
+                    },
+                    new MedicineCategory()
+                    {
+                        Name = "Vitamin",
+                        Alias = GetAliasByName.GetAlias("Vitamin"),
+                        Status = true
+                    },
+                    new MedicineCategory()
+                    {
+                        Name = "Thuốc ngủ",
+                        Alias = GetAliasByName.GetAlias("Thuốc ngủ"),
+                        Status = true
+                    },
+                    new MedicineCategory()
+                    {
+                        Name = "Thuốc giảm đau",
+                        Alias = GetAliasByName.GetAlias("Thuốc giảm đau"),
+                        Status = true
+                    },
+                    new MedicineCategory()
+                    {
+                        Name = "Thuốc Tiêm",
+                        Alias = GetAliasByName.GetAlias("Thuốc Tiêm"),
+                        Status = true
+                    },
+                    new MedicineCategory()
+                    {
+                        Name = "Thuốc xoa",
+                        Alias = GetAliasByName.GetAlias("Thuốc xoa"),
+                        Status = true
+                    },
+                };
+                context.MedicineCategories.AddRange(listMedicineCategories);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateComment(SunShineHospital.Data.SunShineHospitalDbContext context)
+        {
+            if (context.Comments.Count() == 0)
+            {
+                List<Comment> listComments = new List<Comment>()
+                {
+                    new Comment()
+                    {
+                        DoctorID = 3,
+                        Content = "Chaò Bác sỹ",
+                        UserId = "6814487d-1fce-4920-a7f6-8fedd5acff8a"
+                    },
+                    new Comment()
+                    {
+                        DoctorID = 3,
+                        Content = "Chaò Bạn",
+                        UserId = "5161dd59-330f-4b83-9c8a-6a3f77c9d253",
+                        ParentID = 1
+                    },
+                    new Comment()
+                    {
+                        DoctorID = 3,
+                        Content = "Chaò mọi người",
+                        UserId = "0de9a06d-f83a-44ce-9194-774bdb52c0ff"
+                    },
+                    new Comment()
+                    {
+                        DoctorID = 3,
+                        Content = "Em muốn được tư vấn",
+                        UserId = "6814487d-1fce-4920-a7f6-8fedd5acff8a",
+                        ParentID = 1
+                    }
+                };
+                context.Comments.AddRange(listComments);
+                context.SaveChanges();
+            }
         }
 
         private void CreateDoctor(SunShineHospital.Data.SunShineHospitalDbContext context)

@@ -9,20 +9,13 @@ namespace SunShineHospital.Models
     {
         public int ID { set; get; }
 
-        public int ExaminationID { set; get; }
-
-        public int DoctorID { set; get; }
-
-        public int TestID { set; get; }
-
         public int Quantitty { set; get; }
 
+        public int TotalDay { set; get; }
 
-        public virtual ExaminationDetailViewModel Examination { set; get; }
+        public string Calendar { set; get; }
 
-        public virtual DoctorViewModel Doctor { set; get; }
-
-        public virtual TestViewModel Test { set; get; }
+        public bool BeforeMeal { set; get; }
 
         public DateTime? CreatedDate { set; get; }
 

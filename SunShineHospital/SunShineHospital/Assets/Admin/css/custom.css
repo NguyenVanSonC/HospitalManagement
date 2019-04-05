@@ -1,0 +1,9 @@
+#icon-medicine{
+    font-size: large;
+}
+
+.btnEditItem, .btnDeleteItem {
+    color: white;
+    font-size: small;
+    align-items: center;
+}

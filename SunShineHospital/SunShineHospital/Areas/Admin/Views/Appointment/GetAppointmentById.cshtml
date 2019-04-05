@@ -1,0 +1,176 @@
+﻿@model SunShineHospital.Areas.Admin.Models.MutilModelPrescription
+
+@{
+    ViewBag.Title = "GetModelById";
+    var appointmentId = ViewBag.AppointmentId;
+}
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="#">Lịch khám</a>
+            </li>
+            <li class="breadcrumb-item active">Thông tin bệnh nhân</li>
+        </ol>
+        <div class="box_general padding_bottom">
+            <div class="header_box version_2">
+                <h2><i class="fa fa-file"></i>Thông tin bệnh nhân </h2>
+            </div>
+            <div>
+                <figure><img src="~/Assets/Admin/img/avatar1.jpg" alt=""></figure>
+                <h4>
+                    @Model.AppoinmentViewModel.FullName
+                @if (Model.AppoinmentViewModel.Healthinsurance == true)
+                {
+                    <i class="approved">Bảo hiểm : Có</i>
+                }
+                else
+                {
+                    <i class="pending">Bảo hiểm : Không</i>
+                }
+            </h4>
+            <ul class="booking_details">
+                <li><strong>Ngày Đặt </strong> @Model.AppoinmentViewModel.Day</li>
+                <li><strong>Giờ Đặt </strong> @Model.AppoinmentViewModel.Time</li>
+                <li><strong>Số Điện Thoại</strong> @Model.AppoinmentViewModel.PhoneNumber</li>
+                <li><strong>Email</strong> @Model.AppoinmentViewModel.Email</li>
+                @{ var gender = Model.AppoinmentViewModel.Gender == true ? "Nam" : "Nữ";}
+                <li><strong>Giới Tính</strong> @gender</li>
+                <li><strong>Địa chỉ</strong> @Model.AppoinmentViewModel.Address</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="box_general padding_bottom">
+        <div class="header_box version_2">
+            <h2><i class="fa fa-folder"></i>Toa Thuốc</h2>
+            <p><a href="#0" class="btn_1 medium" id="add-medicine">Thêm</a></p>
+        </div>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">                      
+                        <h4 class="modal-title">Đơn Thuốc</h4>
+                    </div>
+                    <form id="frmMedicine" data-id="@appointmentId">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Loại thuốc</label>
+                                        <select class="form-control" id="category-medicine"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tên Thuốc</label>
+                                        <select class="form-control" disabled="disabled" id="medicine-name"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Lịch Uống</label>
+                                        <select class="form-control" name="calendar_medicine" id="calendar_medicine">
+                                            <option value="1-1-1">Sáng-Trưa-Tối</option>
+                                            <option value="1-0-1">Sáng-Tối</option>
+                                            <option value="1-1-0">Sáng-Trưa</option>
+                                            <option value="0-1-1">Trưa-Tối</option>
+                                            <option value="1-0-0">Sáng</option>
+                                            <option value="0-1-0 ">Trưa</option>
+                                            <option value="0-0-1">Tối</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Số ngày</label>
+                                        <input type="number" class="form-control" placeholder="Số ngày" name="number_day" id="number_day">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Số lượng</label>
+                                        <input type="number" class="form-control" placeholder="Số lượng" name="number_medicine" id="number_medicine">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Trước ăn</label>
+                                        <input type="checkbox" class="form-control" id="before-meal">
+                                    </div>
+                                </div>
+                            </div>                                
+                        </div>
+                    </form>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" id="btn-frmMedicine">Lưu</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+      
+            </div>
+        </div>
+        
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <div id="cartContent"> </div>
+                <table class="table table-bordered" id="dataTable" width="520" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Tên Thuốc</th>
+                        <th>Lịch Uống</th>
+                        <th>Số Ngày</th>
+                        <th>Giá</th>
+                        <th>Số Lượng</th>
+                        <th>Tổng Tiền</th>
+                        <th>Trước ăn</th>
+                        <th>Sửa</th>
+                        <th>Xóa Hết :<a class="delete btnDeleteAll" data-id="@appointmentId" href="#"><i class="fa fa-fw fa-trash" id="icon-medicine"></i></a></th>
+                    </tr>
+                    </thead>
+                    <tbody id="table-medicine"></tbody>
+                </table>
+                <div class="pull-right" id="cartTotalPrice">
+                    Tổng tiền: <span id="lblTotalOrder"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box_general padding_bottom">
+        <div class="header_box version_2">
+            <h2><i class="fa fa-file-text"></i>Chẩn Đoán</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @using (Html.BeginForm("CreatePresciption", "Prescription", FormMethod.Post))
+                {
+                    @Html.HiddenFor(model => model.CreatePrescription.AppointmentId)
+                    <div class="form-group">
+                        @Html.TextAreaFor(model => model.CreatePrescription.Diagnose, new { @class = "form-control", @placeholder = "Chẩn đoán", @rows = "5", @style = "height:100px;" })
+                    </div>
+                    <div class="form-group add_top_20">
+                        <input class="btn_1 medium" type="submit" value="Xong">
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+<script id="tplCart" type="x-tmpl-mustache">
+    <tr>
+        <td>{{MedicineName}}</td>
+        <td>{{Calendar}}</td>
+        <td>{{TotalDay}}</td>
+        <td>{{Price}}</td>
+        <td class="txtQuantity" data-id="{{MedicineId}}" data-price="{{Price}}">{{Quantity}}</td>
+        <td>{{TotalPrice}}</td>
+        <td><i class="fa fa-fw fa-check txtBeforeMeal" id="icon-medicine" data-status="{{BeforeMeal}}" style="display:none;"></i></td>
+        <td><button type="button" class="btn btn-warning btnEditItem" data-id="{{MedicineId}}" data-name="{{MedicineName}}">Sửa</button></td>
+        <td><button type="button" class="btnDeleteItem btn btn-danger" data-id="{{MedicineId}}" id="btnDeleteItem">Xoá</button></td>
+    </tr>
+</script>

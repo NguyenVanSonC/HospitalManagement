@@ -8,6 +8,8 @@ namespace SunShineHospital.Models
 {
     public class AppoinmentViewModel
     {
+        public int ID { set; get; }
+
         public int DoctorID { set; get; }
 
         public int PatientID { set; get; }
@@ -36,6 +38,10 @@ namespace SunShineHospital.Models
         public string PhoneNumber { set; get; }
 
         public string Email { set; get; }
+
+        public string Time { set; get; }
+
+        public string Day { set; get; }
 
         public DateTime? CreatedDate { set; get; }
 

@@ -55,10 +55,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppoinmentService.cs" />
+    <Compile Include="CommentService.cs" />
     <Compile Include="DepartmentService.cs" />
     <Compile Include="DoctorService.cs" />
+    <Compile Include="MedicineCategoryService.cs" />
+    <Compile Include="MedicineService.cs" />
     <Compile Include="PatientService.cs" />
+    <Compile Include="PrescriptionDetailService.cs" />
+    <Compile Include="PrescriptionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RateService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SunShineHospital.Common\SunShineHospital.Common.csproj">

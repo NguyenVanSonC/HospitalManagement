@@ -20,9 +20,12 @@ namespace SunShineHospital.Model.Models
         [MaxLength(256)]
         public string Alias { set; get; }
 
-        [Required]
         [MaxLength(256)]
         public string Company { set; get; }
+
+        [Required]
+        [MaxLength(256)]
+        public string Name { set; get; }
 
         [MaxLength(256)]
         public string Image { set; get; }
@@ -33,5 +36,11 @@ namespace SunShineHospital.Model.Models
         public decimal Price { set; get; }
         public int? Warranty { set; get; }
         public int Quantity { set; get; }
+
+        [Required]
+        public int CategoryID { set; get; }
+
+        [ForeignKey("CategoryID")]
+        public virtual MedicineCategory MedicineCategory { set; get; }
     }
 }

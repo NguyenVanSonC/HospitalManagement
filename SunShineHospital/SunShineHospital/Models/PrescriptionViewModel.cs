@@ -17,6 +17,7 @@ namespace SunShineHospital.Models
 
         public string PaymentMethod { set; get; }
 
+        public string Diagnose { set; get; }
 
         public string PaymentStatus { set; get; }
 

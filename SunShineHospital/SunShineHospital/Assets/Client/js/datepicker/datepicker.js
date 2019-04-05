@@ -1,7 +1,15 @@
 ﻿$(document).ready(function() {
     datepicker.init();
     datepicker.registerEvents();
+    //var doctorId = parseInt($("#calendar").data('id'));
+    //datepicker.getCalendarDoctor(doctorId);
 });
+
+function sameDay(d1, d2) {
+    return d1.getFullYear() === d2.getFullYear() &&
+        d1.getMonth() === d2.getMonth() &&
+        d1.getDate() === d2.getDate();
+}
 
 var datepicker = {
     init: function () {
@@ -29,26 +37,114 @@ var datepicker = {
         $("#calendar").datepicker({
             minDate: dateToday,
             beforeShowDay: $.datepicker.noWeekends,
-            dateFormat: "yy-mm-dd"
+            dateFormat: "yy-mm-dd",
+            onSelect: function (selected) {
+                var doctorId = parseInt($("#calendar").data('id'));
+                datepicker.getCalendarDoctor(doctorId, selected);
+                var doctorId = parseInt($(this).data('id'));
+                datepicker.bookingdoctor_day(selected, doctorId);
+            }
         });
     },
 
+    
     registerEvents: function () {
-        $("#calendar").on("change", function () {
-            var selected = $(this).val();
-            var doctorId = parseInt($(this).data('id'));
-            datepicker.bookingdoctor_day(selected, doctorId);
-        });
-
         $('input:radio[name=radio_time]').change(function () {
             var selected = $(this).val();
+            var parent = $(this).parent();
             var doctorId = parseInt($(this).data('id'));
             datepicker.bookingdoctor_time(selected, doctorId);
+            parent.find('label').css("background-color", "black");
+            parent.find('label').css("color", "#fff");
+            $('input:radio[name=radio_time]').each(function(i) {
+                if (selected != $(this).val()) {
+                    var parent = $(this).parent();
+                    if ($(this).is(':enabled')) {
+                        parent.find('label').css("background-color", "#f8f8f8");
+                        parent.find('label').css("color", "black");
+                    }
+                }
+            });
         });
 
         $('#btnCreateBooking').off('click').on('click', function (e) {
             e.preventDefault();
             datepicker.checkTimeBooking();
+        });
+    },
+
+    getCalendarDoctor: function (doctorId, selected) {
+        $.ajax({
+            url: '/Booking/GetCalendarDoctor',
+            data: {
+                doctorId: doctorId
+            },
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                if (response.status) {
+                    var dateDoctor = response.data;
+                    if (selected != null) {
+                        var currentdate = new Date();
+                        var daySelected = new Date(selected);
+                        var currentTime = currentdate.getHours() * 60 + currentdate.getMinutes();
+                        $('input:radio[name=radio_time]').each(function (i) {
+                            var parent = $(this).parent();
+                            if (sameDay(currentdate, daySelected)) {
+                                var timeofInput = $(this).val();
+                                var array = timeofInput.split(":");
+                                var hour = parseInt(array[0]);
+                                var minute = parseInt(array[1]);
+                                var totalTime = (hour * 60) + minute;
+                                if (totalTime < currentTime) {
+                                    parent.find('label').css("background-color", "#74d1c6");
+                                    parent.find('label').css("color", "#fff");
+                                    $(this).attr("disabled", true);
+                                    console.log("thoa man dk");
+                                    parent.find('label').on('mouseover mouseenter mouseleave mouseup mousedown',
+                                        function () {
+                                            parent.find('label').css("background-color", "#74d1c6");
+                                            parent.find('label').css("color", "#fff");
+                                        });
+                                    console.log("Same Day");
+                                }
+                            } else {
+                                parent.find('label').css("background-color", "#f8f8f8");
+                                parent.find('label').css("color", "black");
+                                $(this).attr("disabled", false);
+                                parent.find('label').on('mouseover', function () {
+                                    $(this).css("background-color", "#e74e84");
+                                    $(this).css("color", "#fff");
+                                });
+                                parent.find('label').on('mouseout', function () {
+                                    $(this).css("background-color", "#f8f8f8");
+                                    $(this).css("color", "black");
+                                });
+                                console.log("Different Day");
+                            }
+                        });
+                        
+                        $.each(dateDoctor, function (key, value) {
+                            var date = new Date(value.Day);
+                            if (sameDay(date, daySelected)) {
+                                $('input:radio[name=radio_time]').each(function (i) {
+                                    var parent = $(this).parent();
+                                    if ($(this).val() == value.Time) {
+                                        parent.find('label').css("background-color", "#74d1c6");
+                                        parent.find('label').css("color", "#fff");
+                                        $(this).attr("disabled", true);
+                                        parent.find('label').on('mouseover mouseenter mouseleave mouseup mousedown',
+                                            function () {
+                                                parent.find('label').css("background-color", "#74d1c6");
+                                                parent.find('label').css("color", "#fff");
+                                            });
+                                    }
+                                });
+                            } 
+                        });
+                    }
+                }
+            }
         });
     },
 
@@ -82,7 +178,7 @@ var datepicker = {
             type: 'POST',
             dataType: 'json',
             success: function (res) {
-                if (re.status) {
+                if (res.status) {
                     datepicker.registerEvents();
                     console.log("time ok");
                 } else {
@@ -102,7 +198,12 @@ var datepicker = {
                     window.location.href = "/dat-lich.html";
                 } else {
                     notification.init();
-                    notification.displayError("Vui Lòng chọn lịch khám");
+                    if (res.error == "day") {
+                        notification.displayError("Vui Lòng chọn ngày khám");
+                    } else {
+                        notification.displayError("Vui Lòng chọn giờ khám");
+                    }
+                    
                 }
             }
         });

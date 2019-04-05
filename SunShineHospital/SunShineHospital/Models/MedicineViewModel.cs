@@ -13,6 +13,7 @@ namespace SunShineHospital.Models
 
         public string Company { set; get; }
 
+        public string Name { set; get; }
 
         public string Image { set; get; }
 

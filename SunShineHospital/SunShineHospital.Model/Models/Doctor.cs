@@ -47,5 +47,7 @@ namespace SunShineHospital.Model.Models
         public virtual ApplicationUser User { set; get; }
 
         public virtual IEnumerable<Test> Tests { set; get; }
+
+        public virtual IEnumerable<Comment> Comments { set; get; }
     }
 }

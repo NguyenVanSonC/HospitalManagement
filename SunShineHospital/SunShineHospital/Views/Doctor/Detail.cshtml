@@ -61,58 +61,76 @@
                         <ul class="time_select version_2 add_top_20">
                             <li>
                                 <input type="radio" id="radio5" name="radio_time" value="08:30" data-id="@Model.ID">
-                                <label for="radio5">08.30am</label>
+                                <label for="radio5">08.30 am</label>
                             </li>
                             <li>
                                 <input type="radio" id="radio6" name="radio_time" value="09:00" data-id="@Model.ID">
-                                <label for="radio6">09.00am</label>
+                                <label for="radio6">09.00 am</label>
                             </li>
                             <li>
                                 <input type="radio" id="radio1" name="radio_time" value="09:30" data-id="@Model.ID">
-                                <label for="radio1">09.30am</label>
+                                <label for="radio1">09.30 am</label>
                             </li>
                             <li>
                                 <input type="radio" id="radio2" name="radio_time" value="10:00" data-id="@Model.ID">
-                                <label for="radio2">10.00am</label>
+                                <label for="radio2">10.00 am</label>
                             </li>
                             <li>
                                 <input type="radio" id="radio3" name="radio_time" value="10:30" data-id="@Model.ID">
-                                <label for="radio3">10.30am</label>
+                                <label for="radio3">10.30 am</label>
                             </li>
                             <li>
                                 <input type="radio" id="radio4" name="radio_time" value="11:00" data-id="@Model.ID">
-                                <label for="radio4">11.00am</label>
+                                <label for="radio4">11.00 am</label>
                             </li>
 
                             <li>
-                                <input type="radio" id="radio7" name="radio_time" value="13.30" data-id="@Model.ID">
-                                <label for="radio7">01.30pm</label>
+                                <input type="radio" id="radio7" name="radio_time" value="13:30" data-id="@Model.ID">
+                                <label for="radio7">01.30 pm</label>
                             </li>
                             <li>
-                                <input type="radio" id="radio8" name="radio_time" value="14.00" data-id="@Model.ID">
-                                <label for="radio8">02.00pm</label>
+                                <input type="radio" id="radio8" name="radio_time" value="14:00" data-id="@Model.ID">
+                                <label for="radio8">02.00 pm</label>
                             </li>
                             <li>
-                                <input type="radio" id="radio9" name="radio_time" value="14.30" data-id="@Model.ID">
-                                <label for="radio9">02.30pm</label>
+                                <input type="radio" id="radio9" name="radio_time" value="14:30" data-id="@Model.ID">
+                                <label for="radio9">02.30 pm</label>
                             </li>
                             <li>
-                                <input type="radio" id="radio10" name="radio_time" value="15.00" data-id="@Model.ID">
-                                <label for="radio10">03.00pm</label>
+                                <input type="radio" id="radio10" name="radio_time" value="15:00" data-id="@Model.ID">
+                                <label for="radio10">03.00 pm</label>
                             </li>
                             <li>
-                                <input type="radio" id="radio11" name="radio_time" value="15.30" data-id="@Model.ID">
-                                <label for="radio11">03.30pm</label>
+                                <input type="radio" id="radio11" name="radio_time" value="15:30" data-id="@Model.ID">
+                                <label for="radio11">03.30 pm</label>
                             </li>
                             <li>
-                                <input type="radio" id="radio12" name="radio_time" value="16.00" data-id="@Model.ID">
-                                <label for="radio12">04.00pm</label>
+                                <input type="radio" id="radio12" name="radio_time" value="16:00" data-id="@Model.ID">
+                                <label for="radio12">04.00 pm</label>
                             </li>
                         </ul>
                     </div>
                 </div>
+                <div class="text-center"><a href="#" class="btn_1 medium" id="btnCreateBooking">Đặt lịch khám </a></div>
             </div>
-            <div class="text-center"><a href="#" class="btn_1 medium" id="btnCreateBooking">Đặt lịch khám </a></div>
-        </div>
+            <div class="tabs_styled_2">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+                        <div class="reviews-container">
+                            <div class="row">
+                                @Html.Action("GetDetail", "Rate", new { id = @Model.ID })
+                            </div>
+                            <hr>
+                            @if (Request.IsAuthenticated)
+                            {
+                                @Html.Action("Index", "Rate", new { id = @Model.ID })
+                            }
+                            @Html.Action("Index", "Comment", new { id = @Model.ID })
+                        </div>                     
+                    </div>  
+                </div>
+            </div>
+        </div>  
     </div>
 </div>
+

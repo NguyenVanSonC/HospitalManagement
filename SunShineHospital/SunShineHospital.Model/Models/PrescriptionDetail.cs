@@ -22,6 +22,16 @@ namespace SunShineHospital.Model.Models
 
         public int Quantitty { set; get; }
 
+        [Required]
+        [Range(0, 50)]
+        public int TotalDay { set; get; }
+
+        [Required]
+        [MaxLength(100)]
+        public string Calendar { set; get; }
+
+        public bool BeforeMeal { set; get; }
+
         [ForeignKey("PrescriptionID")]
         public virtual Prescription Prescription { set; get; }
 

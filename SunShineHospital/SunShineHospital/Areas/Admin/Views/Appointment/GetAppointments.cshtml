@@ -1,0 +1,96 @@
+﻿@using SunShineHospital.Infrastructure.Core
+@using SunShineHospital.Models
+@model PaginationSet<AppoinmentViewModel>
+
+@{
+    ViewBag.Title = "GetAppointments";
+    var doctorId = ViewBag.doctorId;
+}
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="#">Trang chủ</a>
+            </li>
+            <li class="breadcrumb-item active">Danh Sách Bệnh Nhân</li>
+        </ol>
+        <div class="box_general">
+            <div class="header_box">
+                <h2 class="d-inline-block">Danh Sách Bệnh Nhân</h2>
+                <div class="filter">
+                    <select name="orderby" class="selectbox">
+                        <option value="Any status">Any status</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+            </div>
+            <div class="list_general">
+                <ul>
+                    @if (@Model.Items.Count() > 0)
+                    {
+                        foreach (var appointment in @Model.Items)
+                        {
+                            <li>
+                                <figure><img src="~/Assets/Admin/img/avatar1.jpg" alt=""></figure>
+                                <h4>@appointment.FullName 
+                                    @if (appointment.Healthinsurance == true)
+                                    {
+                                        <i class="approved">Bảo hiểm : Có</i>
+                                    }
+                                    else
+                                    {
+                                        <i class="pending">Bảo hiểm : Không</i>
+                                    }
+                                </h4>
+                                <ul class="booking_details">
+                                    <li><strong>Ngày Đặt </strong> @appointment.Day</li>
+                                    <li><strong>Giờ Đặt </strong> @appointment.Time</li>
+                                    <li><strong>Số Điện Thoại</strong> @appointment.PhoneNumber</li>
+                                    <li><strong>Email</strong> @appointment.Email</li>
+                                    @{ var gender = appointment.Gender == true ? "Nam" : "Nữ";}
+                                    <li><strong>Giới Tính</strong> @gender</li>
+                                    <li><strong>Địa chỉ</strong> @appointment.Address</li>
+                                </ul>
+                                <ul class="buttons">
+                                    @{
+                                        var url = "/Admin/Appointment/" + @appointment.ID;
+
+                                    }
+                                    <li><a href="@Url.Action("GetAppointmentById", "Appointment", new {id = appointment.ID})" class="btn_1 gray approve"><i class="fa fa-fw fa-check-circle-o"></i> Khám</a></li>
+                                    <li><a href="#0" class="btn_1 gray delete"><i class="fa fa-fw fa-times-circle-o"></i> Hủy</a></li>
+                                </ul>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li>Không có dữ liệu</li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <nav aria-label="...">
+            <ul class="pagination pagination-sm add_bottom_30">
+                @if (Model.Page > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="?page=@(Model.Page - 1)" tabindex="-1">Trang Sau</a>
+                    </li>
+                }
+                @for (int i = 1; i <= @Model.TotalPages; i++)
+                {
+                    <li class="page-item"><a class="page-link" href="?page=@i">@i</a></li>
+                }
+                @if (Model.Page < Model.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="?page=@(Model.Page + 1)">Trang Tiếp</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>

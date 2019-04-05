@@ -16,10 +16,11 @@ namespace SunShineHospital.Model.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { set; get; }
 
-        public int DoctorID { set; get; }
+        [Required]
+        [MaxLength(200)]
+        public string Diagnose { set; get; }
 
-
-        public int PatientID { set; get; }
+        public int AppointmentID { set; get; }
 
         [MaxLength(256)]
         public string PaymentMethod { set; get; }
@@ -27,11 +28,8 @@ namespace SunShineHospital.Model.Models
 
         public string PaymentStatus { set; get; }
 
-        [ForeignKey("DoctorID")]
-        public virtual Doctor Doctor { set; get; }
-
-        [ForeignKey("PatientID")]
-        public virtual Patient Patient { set; get; }
+        [ForeignKey("AppointmentID")]
+        public virtual Appoinment Appoinment { set; get; }
 
         public virtual IEnumerable<PrescriptionDetail> PrescriptionDetails { set; get; }
     }
