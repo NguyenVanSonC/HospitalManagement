@@ -20,7 +20,7 @@
             <div class="col-xl-8 col-lg-8">
                 <div class="box_general_3 cart">
                     <div class="message">
-                        <p>Bạn có tài khoản? <a href="#0">Đăng nhập</a></p>
+                        <p>Bạn có tài khoản? <a href="@Url.Action("Login", "Account", new {returnUrl = Request.Url.PathAndQuery})">Đăng nhập</a></p>
                     </div>
                     <div class="form_title">
                         <h3><strong></strong>Thông tin của bạn</h3>
@@ -34,7 +34,7 @@
                             {
                                 <div class="form-group">
                                     <label>
-                                        <input type="checkbox" name="policy_terms" id="policy_terms">
+                                        <input type="checkbox" name="policy_terms" id="chkUserLoginInfo">
                                         Sử dụng thông tin đăng nhập
                                     </label>
                                 </div>

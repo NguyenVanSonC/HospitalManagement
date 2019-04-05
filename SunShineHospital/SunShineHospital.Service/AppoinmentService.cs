@@ -19,6 +19,12 @@ namespace SunShineHospital.Service
 
         IEnumerable<Appoinment> GetAll();
 
+        IEnumerable<Appoinment> GetByDoctorId(int doctorId);
+
+        bool CheckAppoinmentByPatientId(int? patientId);
+
+        Appoinment GetAppoinmentByPatientId(int? patientId);
+
         void Save();
     }
     public class AppoinmentService : IAppoinmentService
@@ -38,12 +44,25 @@ namespace SunShineHospital.Service
 
         public Appoinment Delete(int id)
         {
-            throw new NotImplementedException();
+            return _appoinmentRepository.Delete(id);
         }
 
         public IEnumerable<Appoinment> GetAll()
         {
             throw new NotImplementedException();
+        }
+
+        public bool CheckAppoinmentByPatientId(int? patientId)
+        {
+            var appoiment = _appoinmentRepository.GetAppoinmentByPatientId(patientId);
+            return appoiment != null ? true : false;
+        }
+
+        public IEnumerable<Appoinment> GetByDoctorId(int doctorId)
+        {
+            var today = DateTime.Today;
+            return _appoinmentRepository.GetByDoctorId(doctorId);
+
         }
 
         public void Save()
@@ -54,6 +73,11 @@ namespace SunShineHospital.Service
         public void Update(Appoinment appoinment)
         {
             throw new NotImplementedException();
+        }
+
+        public Appoinment GetAppoinmentByPatientId(int? patientId)
+        {
+            return _appoinmentRepository.GetAppoinmentByPatientId(patientId);
         }
     }
 }
