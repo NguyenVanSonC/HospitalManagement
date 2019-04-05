@@ -19,7 +19,46 @@ namespace SunShineHospital.Data.Migrations
 
         protected override void Seed(SunShineHospital.Data.SunShineHospitalDbContext context)
         {
-           CreateDoctor(context);
+           //CreateDoctor(context);
+            CreateComment(context);
+        }
+
+        private void CreateComment(SunShineHospital.Data.SunShineHospitalDbContext context)
+        {
+            if (context.Comments.Count() == 0)
+            {
+                List<Comment> listComments = new List<Comment>()
+                {
+                    new Comment()
+                    {
+                        DoctorID = 3,
+                        Content = "Chaò Bác sỹ",
+                        UserId = "6814487d-1fce-4920-a7f6-8fedd5acff8a"
+                    },
+                    new Comment()
+                    {
+                        DoctorID = 3,
+                        Content = "Chaò Bạn",
+                        UserId = "5161dd59-330f-4b83-9c8a-6a3f77c9d253",
+                        ParentID = 1
+                    },
+                    new Comment()
+                    {
+                        DoctorID = 3,
+                        Content = "Chaò mọi người",
+                        UserId = "0de9a06d-f83a-44ce-9194-774bdb52c0ff"
+                    },
+                    new Comment()
+                    {
+                        DoctorID = 3,
+                        Content = "Em muốn được tư vấn",
+                        UserId = "6814487d-1fce-4920-a7f6-8fedd5acff8a",
+                        ParentID = 1
+                    }
+                };
+                context.Comments.AddRange(listComments);
+                context.SaveChanges();
+            }
         }
 
         private void CreateDoctor(SunShineHospital.Data.SunShineHospitalDbContext context)

@@ -31,3 +31,50 @@ field-validation-error {
     height: 35px;
     text-align: center;
 }
+#comments-reply{
+    margin-left: 20px;
+}
+#area-comment-btn{
+    margin-bottom: 4px;
+    margin-left: 440px;
+}
+#btn-comment li {
+    display: inline-block;
+}
+#btn-comment{
+    margin-right: 2px;
+}
+#btn-comment li a{
+    background-color: #e74e84;
+    color: #fff;
+    width: 45px;
+    height: 10px;
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+#btn-comment li a:hover {
+    background-color: #74d1c6;
+    color: #fff;
+}
+
+.rating-stars ul {
+    list-style-type:none;
+    padding: 0;
+}
+.list-start li {
+    display: inline-block;
+    font-size: 2.0em;
+    color: #ccc; 
+}
+.list-start li.hover {
+    color: #FFCC36;
+}
+
+.list-start li.selected {
+    color: #FF912C;
+}
+#header-rate {
+    align-items: center;
+    color: #3f4079;
+    font-size: large;
+}

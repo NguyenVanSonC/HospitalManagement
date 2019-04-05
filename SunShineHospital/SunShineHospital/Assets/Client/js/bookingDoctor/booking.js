@@ -47,12 +47,65 @@ var booking = {
             }
         });
 
-        $('#healthinsurance').change(function() {
+        $('#healthinsurance').change(function () {
             if (this.checked) {
                 $(".treatments").find('strong').text('140VNĐ -(30%)');
                 $('#chargeTotal').text('140VNĐ');
             } else {
                 $(".treatments").find('strong').text('200VNĐ');
+            }
+        });
+
+        $('#chkUserLoginInfo').off('click').on('click', function () {
+            if ($(this).prop('checked'))
+                booking.getLoginUser();
+            else {
+                $('#firstname_booking').val(''),
+                    $('#address_booking').val(''),
+                    $('#telephone_booking').val(''),
+                    $('#email_booking').val('')
+            }
+        });
+    },
+
+    getLoginUser: function () {
+        $.ajax({
+            url: '/Booking/GetUser',
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                if (response.status) {
+                    var user = response.data;
+                    var gender = user.Gender;
+                    console.log(user.BirthDay);
+                    if (gender) {
+                        $('#gender').val('true');
+                    } else {
+                        $('#gender').val('false');
+                    }
+                    $('#firstname_booking').val(user.FullName),
+                        $('#address_booking').val(user.Address),
+                        // $('#birth_booking').val(),
+                        $('#telephone_booking').val(user.PhoneNumber),
+                        $('#email_booking').val(user.Email)
+
+                }
+            }
+        });
+    },
+
+    cancelAppoinment: function(appoinmentId) {
+        $.ajax({
+            url: '/Booking/CancelAppoinment',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                appoinmentID: appoinmentId
+            },
+            success: function(response) {
+                if (response.status) {
+                    booking.createBooking();
+                }
             }
         });
     },
@@ -83,7 +136,31 @@ var booking = {
             },
             success: function(response) {
                 if (response.status) {
-                    console.alert("Thank you so much");
+                    window.location.href = "/thank-booking.html";
+                } else {
+                    if (response.error == "dulicate-appoinment") {
+                        bootbox.confirm({
+                            message: "Bạn muốn hủy lịch khám cũ ?",
+                            buttons: {
+                                cancel: {
+                                    label: 'Không',
+                                    className: 'btn-danger'
+                                },
+                                confirm: {
+                                    label: 'Có',
+                                    className: 'btn-success'
+                                },
+                            },
+                            callback: function (result) {
+                                if (result == true) {
+                                    var appoinmentId = parseInt(response.appoinmentID);
+                                    booking.cancelAppoinment(appoinmentId);
+                                } else {
+                                    window.location.href = "/";
+                                }
+                            }
+                        });
+                    }
                 }
             }
         });

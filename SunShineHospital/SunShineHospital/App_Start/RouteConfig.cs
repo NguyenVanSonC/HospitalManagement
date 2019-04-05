@@ -15,6 +15,12 @@ namespace SunShineHospital
             routes.IgnoreRoute("{*botdetect}", new { botdetect = @"(.*)BotDetectCaptcha\.ashx" });
 
             routes.MapRoute(
+                name: "ThankPatient",
+                url: "thank-booking.html",
+                defaults: new { controller = "Booking", action = "ThankPatient", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Checkout",
                 url: "dat-lich.html",
                 defaults: new { controller = "Booking", action = "CreateBooking", id = UrlParameter.Optional }

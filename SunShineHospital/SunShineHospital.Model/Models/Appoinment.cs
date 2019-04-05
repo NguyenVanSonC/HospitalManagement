@@ -13,12 +13,13 @@ namespace SunShineHospital.Model.Models
     public class Appoinment : Auditable
     {
         [Key]
-        [Column(Order = 1)]
-        public int DoctorID { set; get; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { set; get; }
 
-        [Key]
-        [Column(Order = 2)]
-        public int PatientID { set; get; }
+        [Required]
+        public int DoctorID { set; get; }
+        
+        public int? PatientID { set; get; }
 
         [MaxLength(256)]
         public string FullName { set; get; }
@@ -35,6 +36,10 @@ namespace SunShineHospital.Model.Models
         public string PhoneNumber { set; get; }
 
         public string Email { set; get; }
+
+        public string Time { set; get; }
+
+        public string Day { set; get; }
 
         [ForeignKey("DoctorID")]
         public virtual Doctor Doctor { set; get; }

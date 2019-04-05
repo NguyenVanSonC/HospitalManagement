@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using AutoMapper;
 using Microsoft.AspNet.Identity;
 using SunShineHospital.Infrastructure.Extensions;
 using SunShineHospital.Model.Models;
@@ -6,6 +8,7 @@ using SunShineHospital.Models;
 using SunShineHospital.Service;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using SunShineHospital.Web.App_Start;
 
 namespace SunShineHospital.Controllers
 {
@@ -14,16 +17,44 @@ namespace SunShineHospital.Controllers
         private IDoctorService _doctorService;
         private IPatientService _patientService;
         private IAppoinmentService _appoinmentService;
+        private ApplicationUserManager _userManager;
 
-        public BookingController(IDoctorService doctorService, IPatientService patientService, IAppoinmentService appoinmentService)
+        public BookingController(IDoctorService doctorService, IPatientService patientService, 
+            IAppoinmentService appoinmentService, ApplicationUserManager userManager)
         {
             this._doctorService = doctorService;
             this._patientService = patientService;
             this._appoinmentService = appoinmentService;
+            this._userManager = userManager;
+        }
+
+        public ActionResult ThankPatient()
+        {
+            return View();
+        }
+
+        public JsonResult GetCalendarDoctor(int doctorId)
+        {
+            var listCalendarDoctor = _appoinmentService.GetByDoctorId(doctorId);
+            if (listCalendarDoctor != null && listCalendarDoctor.Any())
+            {
+                return Json(new
+                {
+                    data = listCalendarDoctor,
+                    status = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new
+                {
+                    status = false
+                });
+            }
         }
 
         [HttpPost]
-        public JsonResult BookedDoctor(string appoinmentViewModel)
+        public JsonResult BookedDoctor(BookingViewModel model, string appoinmentViewModel)
         {
             var appoinment = new JavaScriptSerializer().Deserialize<AppoinmentViewModel>(appoinmentViewModel);
             var appoinmentModel = new Appoinment();
@@ -34,9 +65,26 @@ namespace SunShineHospital.Controllers
                 //Get patient by userid
                 var userId = User.Identity.GetUserId();
                 appoinmentModel.PatientID = _patientService.GetPatientIdByUserId(userId);
+                if (_appoinmentService.CheckAppoinmentByPatientId(appoinmentModel.PatientID))
+                {
+                    var appoinmentDulicate = _appoinmentService.GetAppoinmentByPatientId(appoinmentModel.PatientID);
+                    return Json(new
+                    {
+                        status = false,
+                        appoinmentID = appoinmentDulicate.ID,
+                        error = "dulicate-appoinment"
+                    });
+                }
                 appoinmentModel.CreatedBy = User.Identity.GetUserName();
             }
+            else
+            {
+                appoinmentModel.PatientID = null;
+            }
 
+            appoinmentModel.Time = model.Time;
+            appoinmentModel.Day = model.Day;
+            appoinmentModel.CreatedDate = DateTime.Now;
             _appoinmentService.Add(appoinmentModel);
             _appoinmentService.Save();
 
@@ -69,6 +117,10 @@ namespace SunShineHospital.Controllers
 
                 if (!string.IsNullOrEmpty(day))
                 {
+                    if (!string.IsNullOrEmpty(model.Time) && day != model.Day)
+                    {
+                        model.Time = null;
+                    }
                     model.Day = day;
                 }
                 return Json(new
@@ -90,10 +142,22 @@ namespace SunShineHospital.Controllers
         {
             if (string.IsNullOrEmpty(model.Day) || string.IsNullOrEmpty(model.Time))
             {
-                return Json(new
+                if (string.IsNullOrEmpty(model.Day))
                 {
-                    status = false
-                });
+                    return Json(new
+                    {
+                        error = "day",
+                        status = false
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        error = "time",
+                        status = false
+                    });
+                }
             }
             else
             {
@@ -101,6 +165,48 @@ namespace SunShineHospital.Controllers
                 {
                     status = true
                 });
+            }
+        }
+
+        [HttpPost]
+        public JsonResult GetUser()
+        {
+            if (Request.IsAuthenticated)
+            {
+                var userId = User.Identity.GetUserId();
+                var user = _userManager.FindById(userId);
+                return Json(new
+                {
+                    data = user,
+                    status = true
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    status = false
+                });
+            }
+        }
+
+        [HttpGet]
+        public JsonResult CancelAppoinment(int appoinmentID)
+        {
+            if (_appoinmentService.Delete(appoinmentID) != null)
+            {
+                _appoinmentService.Save();
+                return Json(new
+                {
+                    status = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new
+                {
+                    status = false
+                }, JsonRequestBehavior.AllowGet);
             }
         }
     }

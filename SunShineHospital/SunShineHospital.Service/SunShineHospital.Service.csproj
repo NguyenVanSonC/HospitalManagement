@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppoinmentService.cs" />
+    <Compile Include="CommentService.cs" />
     <Compile Include="DepartmentService.cs" />
     <Compile Include="DoctorService.cs" />
     <Compile Include="PatientService.cs" />

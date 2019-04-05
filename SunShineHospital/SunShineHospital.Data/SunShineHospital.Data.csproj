@@ -97,9 +97,42 @@
     <Compile Include="Migrations\201903261616424_changeAppointmentTable.Designer.cs">
       <DependentUpon>201903261616424_changeAppointmentTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903280821400_ChangeAppoimentPatientId.cs" />
+    <Compile Include="Migrations\201903280821400_ChangeAppoimentPatientId.Designer.cs">
+      <DependentUpon>201903280821400_ChangeAppoimentPatientId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903280824479_ChangeAppoimentForeignkey.cs" />
+    <Compile Include="Migrations\201903280824479_ChangeAppoimentForeignkey.Designer.cs">
+      <DependentUpon>201903280824479_ChangeAppoimentForeignkey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903281413244_ChangeAppointmentFinal.cs" />
+    <Compile Include="Migrations\201903281413244_ChangeAppointmentFinal.Designer.cs">
+      <DependentUpon>201903281413244_ChangeAppointmentFinal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903281634429_ChangeAppointmentAddTime.cs" />
+    <Compile Include="Migrations\201903281634429_ChangeAppointmentAddTime.Designer.cs">
+      <DependentUpon>201903281634429_ChangeAppointmentAddTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904011615570_AddTableComments.cs" />
+    <Compile Include="Migrations\201904011615570_AddTableComments.Designer.cs">
+      <DependentUpon>201904011615570_AddTableComments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904030344578_EditCommentTable.cs" />
+    <Compile Include="Migrations\201904030344578_EditCommentTable.Designer.cs">
+      <DependentUpon>201904030344578_EditCommentTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904030352266_EditCommentTableTwo.cs" />
+    <Compile Include="Migrations\201904030352266_EditCommentTableTwo.Designer.cs">
+      <DependentUpon>201904030352266_EditCommentTableTwo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904041517584_AddRateTable.cs" />
+    <Compile Include="Migrations\201904041517584_AddRateTable.Designer.cs">
+      <DependentUpon>201904041517584_AddRateTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AppoinmentRepository.cs" />
+    <Compile Include="Repositories\CommentRepository.cs" />
     <Compile Include="Repositories\DepartmentRepository.cs" />
     <Compile Include="Repositories\DoctorRepository.cs" />
     <Compile Include="Repositories\Examination.cs" />
@@ -153,6 +186,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903261616424_changeAppointmentTable.resx">
       <DependentUpon>201903261616424_changeAppointmentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903280821400_ChangeAppoimentPatientId.resx">
+      <DependentUpon>201903280821400_ChangeAppoimentPatientId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903280824479_ChangeAppoimentForeignkey.resx">
+      <DependentUpon>201903280824479_ChangeAppoimentForeignkey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903281413244_ChangeAppointmentFinal.resx">
+      <DependentUpon>201903281413244_ChangeAppointmentFinal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903281634429_ChangeAppointmentAddTime.resx">
+      <DependentUpon>201903281634429_ChangeAppointmentAddTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904011615570_AddTableComments.resx">
+      <DependentUpon>201904011615570_AddTableComments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904030344578_EditCommentTable.resx">
+      <DependentUpon>201904030344578_EditCommentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904030352266_EditCommentTableTwo.resx">
+      <DependentUpon>201904030352266_EditCommentTableTwo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904041517584_AddRateTable.resx">
+      <DependentUpon>201904041517584_AddRateTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
